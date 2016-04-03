@@ -8,35 +8,35 @@
 
 import SpriteKit
 
+var player = SKSpriteNode?()
+var enemy = SKSpriteNode?()
+var projectile = SKSpriteNode?()
+var start = SKSpriteNode?()
+
+var playerSize = CGSize(width: 50, height: 50)
+var enemySize = CGSize(width: 40, height: 40)
+var projectileSize = CGSize(width: 10, height: 10)
+var startSize = CGSize?()
+
+var offBalckColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
+var offWhoteColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
+
+
+
+var touchLocation = CGPoint?()
+
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!"
-        myLabel.fontSize = 65
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        
-        self.addChild(myLabel)
+    
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
         for touch in touches {
-            let location = touch.locationInNode(self)
+            touchLocation = touch.locationInNode(self)
             
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
+            }
     }
    
     override func update(currentTime: CFTimeInterval) {
