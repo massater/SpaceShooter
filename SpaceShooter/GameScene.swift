@@ -27,7 +27,8 @@ var touchLocation = CGPoint?()
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
-    
+        self.backgroundColor = offBalckColor
+        spawnPlayer()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -39,7 +40,32 @@ class GameScene: SKScene {
             }
     }
    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            touchLocation = touch.locationInNode(self)
+            player?.position.y = (touchLocation?.y)!
+        }
+    }
+    
+    func spawnPlayer(){
+        player = SKSpriteNode(color: offWhoteColor, size: playerSize)
+        player?.position = CGPoint(x: CGRectGetMinX(self.frame) + 100, y: CGRectGetMidY(self.frame))
+        
+        self.addChild(player!)
+    }
+    
+    func keepPlayerOnScreen(){
+        if player?.position.y >= 640{
+            player?.position.y = 640
+        }
+        
+        if player?.position.y <= 125{
+            player?.position.y = 125
+        }
+    }
+    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        keepPlayerOnScreen()
     }
 }
